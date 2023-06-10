@@ -1,0 +1,26 @@
+package ${package.Mapper};
+
+import org.springframework.stereotype.Repository;
+import ${package.Entity}.${entity};
+import ${superMapperClassPackage};
+#if(${mapperAnnotationClass})
+import ${mapperAnnotationClass.name};
+#end
+
+/**
+ * $!{table.comment} dao 接口
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+#if(${mapperAnnotationClass})
+@${mapperAnnotationClass.simpleName}
+#end
+#if(${kotlin})
+interface ${table.mapperName} : ${superMapperClass}<${entity}>
+#else
+@Repository
+public interface ${table.mapperName} extends ${superMapperClass}<${entity},Long> {
+
+}
+#end

@@ -1,0 +1,1 @@
+INSERT INTO `sys_user` VALUES (1, 'admin', 'Y8IK0dbD34/j7tz5Fk7yLw==', '', 'http://192.168.2.4:8871/saffron/file/preview?filePath=/20230322/wallhaven-3zxg56.jpg', 0, NULL, 1, '2023-03-22 21:03:29', '2023-03-22 21:03:34','2023-04-02 00:53:53');
