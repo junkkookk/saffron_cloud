@@ -1,9 +1,9 @@
 server:
-  port: 20022
+  port: 20020
   tomcat:
     connection-timeout: 60000
   servlet:
-    context-path: /saffron-server
+    context-path: /saffron-crawler
 spring:
   sql:
     init:
@@ -71,8 +71,8 @@ spring:
       ddl-auto: update
     database-platform: org.hibernate.dialect.MySQLDialect
   xxl:
-    url: http://127.0.0.1:10000/xxl-job-admin
+    url: http://${XXL_HOST:xxl-admin}:8080/xxl-job-admin
     access-token: default_token
-    app-name: saffron
+    app-name: saffron-crawler
     port: 9999
     log-retention-days: 30

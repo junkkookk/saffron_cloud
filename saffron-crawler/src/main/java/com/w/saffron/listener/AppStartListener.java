@@ -1,6 +1,7 @@
 package com.w.saffron.listener;
 
-import com.w.saffron.application.sys.domain.Config;
+import com.w.saffron.crawler.task.CheckStatusJob;
+import com.w.saffron.crawler.task.FetchZmqJob;
 import com.w.saffron.schdule.JobManager;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
@@ -26,23 +27,12 @@ public class AppStartListener implements ApplicationListener<ApplicationStartedE
     @Override
     public void onApplicationEvent(@NotNull ApplicationStartedEvent event) {
         initJob();
-        initConfig();
     }
 
     private void initJob() {
         JobManager.addJob(List.of(
+                new FetchZmqJob(),
+                new CheckStatusJob()
         ));
-    }
-
-    public void initConfig(){
-        Config config = mongoTemplate.findById(1L, Config.class);
-        if (config==null){
-            config = new Config();
-            config.setId(1L);
-            config.setBackgroundImage("/saffron_files/background.jpg");
-            config.setAppName("saffron");
-            config.setAppDesc("a saffron app");
-            mongoTemplate.save(config);
-        }
     }
 }

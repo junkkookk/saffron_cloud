@@ -1,4 +1,4 @@
-package com.w.saffron.video.service;
+package com.w.saffron.crawler.service;
 
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
@@ -6,9 +6,9 @@ import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.w.saffron.common.exception.OprException;
+import com.w.saffron.crawler.interfaces.ZmqApi;
 import com.w.saffron.video.bean.VideoRequest;
 import com.w.saffron.video.constant.*;
-import com.w.saffron.video.interfaces.ZmqApi;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -79,7 +79,7 @@ public class ZmqService {
                         .build());
             }
         } catch (Exception e) {
-            log.error("采集失败 第:"+page+"页");
+            log.error("采集失败 第:"+page+"页",e);
         }
         return videoRequests;
     }

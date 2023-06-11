@@ -1,14 +1,14 @@
-package com.w.saffron.video.task;
+package com.w.saffron.crawler.task;
 
 import cn.hutool.extra.spring.SpringUtil;
 import com.w.saffron.common.PageParam;
+import com.w.saffron.crawler.service.VideoService;
+import com.w.saffron.crawler.service.ZmqService;
 import com.w.saffron.schdule.BaseJob;
 import com.w.saffron.schdule.ScheduleBuilder;
 import com.w.saffron.video.bean.VideoRequest;
 import com.w.saffron.video.constant.Status;
 import com.w.saffron.video.domain.Video;
-import com.w.saffron.video.service.VideoService;
-import com.w.saffron.video.service.ZmqService;
 import com.xxl.job.core.biz.model.ReturnT;
 import io.github.linpeilie.Converter;
 import lombok.SneakyThrows;

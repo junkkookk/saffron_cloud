@@ -1,4 +1,4 @@
-package com.w.saffron.video.interfaces;
+package com.w.saffron.crawler.interfaces;
 
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.service.annotation.GetExchange;

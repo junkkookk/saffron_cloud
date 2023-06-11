@@ -1,7 +1,7 @@
-package com.w.saffron.video.config;
+package com.w.saffron.crawler.config;
 
 
-import com.w.saffron.video.interfaces.ZmqApi;
+import com.w.saffron.crawler.interfaces.ZmqApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;

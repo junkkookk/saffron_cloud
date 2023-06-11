@@ -39,7 +39,6 @@
 		<easy-relation.version>1.0.0</easy-relation.version>
 		<jieba.version>1.0.2</jieba.version>
 		<xxl-job.version>2.4.0</xxl-job.version>
-
 		<jackson.version>2.15.1</jackson.version>
 	</properties>
 	<dependencyManagement>

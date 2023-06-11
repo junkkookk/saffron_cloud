@@ -1,11 +1,11 @@
-package com.w.saffron.video.task;
+package com.w.saffron.crawler.task;
 
 import cn.hutool.extra.spring.SpringUtil;
+import com.w.saffron.crawler.service.VideoService;
+import com.w.saffron.crawler.service.ZmqService;
 import com.w.saffron.schdule.BaseJob;
 import com.w.saffron.schdule.ScheduleBuilder;
 import com.w.saffron.video.bean.VideoRequest;
-import com.w.saffron.video.service.VideoService;
-import com.w.saffron.video.service.ZmqService;
 import com.xxl.job.core.biz.model.ReturnT;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -45,10 +45,10 @@ public class FetchZmqJob extends BaseJob {
                     log.info("入库成功"+saveOrUpdate.getUuid());
                     count++;
                 }catch (Exception e){
-                    log.debug("入库出错："+ e.getMessage());
+                    log.error("入库出错："+ e.getMessage());
                 }
             }
-            if (count==0){
+            if (count<24){
                 hasMore = false;
             }
             totalCount = totalCount + count;
