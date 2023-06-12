@@ -18,6 +18,7 @@
 		<module>saffron-server</module>
 		<module>saffron-core</module>
         <module>saffron-crawler</module>
+        <module>saffron-gate</module>
     </modules>
 	<packaging>pom</packaging>
 	<properties>
@@ -58,6 +59,14 @@
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-dependencies</artifactId>
 				<version>2022.0.0</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-gateway-dependencies</artifactId>
+				<version>4.0.0</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
