@@ -1,5 +1,5 @@
 server:
-  port: 8871
+  port: 20021
   tomcat:
     connection-timeout: 60000
   servlet:
@@ -18,7 +18,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     name: defaultDataSource
-    url: jdbc:mysql://${MYSQL_HOST:mysql}:3306/saffron?serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://${MYSQL_HOST:mysql}:3306/saffron_chaos?serverTimezone=Asia/Shanghai
     username: root
     password: 123456
     hikari:
@@ -75,9 +75,9 @@ spring:
   jpa:
     show-sql: false
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
   xxl:
-    url: http://${XXL_HOST:xxl-admin}:10000/xxl-job-admin
+    url: http://${XXL_HOST:xxl-admin}:8080/xxl-job-admin
     access-token: default_token
     app-name: saffron
     port: 9999

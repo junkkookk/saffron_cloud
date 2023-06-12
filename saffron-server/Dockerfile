@@ -1,6 +1,7 @@
 FROM tomcat:10.1.7-jre17
 MAINTAINER w
-ADD /target/saffron-server.war /usr/local/tomcat/webapps/
+ARG WAR_FILE
+ADD /target/${WAR_FILE} /usr/local/tomcat/webapps/
 ENV TZ Asia/Shanghai
 RUN ln -fs /usr/share/zoneinfo/${TZ} /etc/localtime \
     && echo ${TZ} > /etc/timezone

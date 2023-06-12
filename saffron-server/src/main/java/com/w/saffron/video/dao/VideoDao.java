@@ -4,6 +4,8 @@ package com.w.saffron.video.dao;
 import com.w.saffron.video.constant.Source;
 import com.w.saffron.video.constant.Status;
 import com.w.saffron.video.domain.Video;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -22,4 +24,5 @@ public interface VideoDao extends JpaRepository<Video,Long> {
 
     List<Video> findByStatus(Status status, Pageable page);
 
+    Page<Video> findPageByStatus(Status ready, PageRequest of);
 }

@@ -43,6 +43,11 @@ public class VideoController {
         return R.ok();
     }
 
+    @GetMapping("search")
+    public R<?> search(Integer current,Integer pageSize){
+        return R.ok(videoService.search(current,pageSize));
+    }
+
 
 
 

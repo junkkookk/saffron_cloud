@@ -1,6 +1,8 @@
 package com.w.saffron.video.service;
 
 
+import com.w.saffron.common.PageParam;
+import com.w.saffron.common.PageResult;
 import com.w.saffron.common.ResultCode;
 import com.w.saffron.common.exception.OprException;
 import com.w.saffron.common.utils.BeanUtil;
@@ -10,11 +12,9 @@ import com.w.saffron.video.dao.VideoDao;
 import com.w.saffron.video.domain.Video;
 import io.github.linpeilie.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.text.MessageFormat;
-import java.util.List;
 
 /**
  * @author w
@@ -57,7 +57,7 @@ public class VideoService {
         return videoDao.findById(id).orElseThrow();
     }
 
-    public List<Video> findByStatus(Status status, PageRequest page) {
-        return videoDao.findByStatus(status,page);
+    public PageResult<Video> search(Integer current, Integer pageSize) {
+        return PageResult.of(videoDao.findPageByStatus(Status.READY, PageParam.of(current,pageSize)));
     }
 }

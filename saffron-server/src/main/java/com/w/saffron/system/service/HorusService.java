@@ -9,7 +9,6 @@ import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.StrUtil;
 import com.w.saffron.application.sys.constant.LoginTypeEnum;
 import com.w.saffron.application.sys.domain.SocialUserRel;
-import com.w.saffron.common.SaffronInfo;
 import com.w.saffron.common.exception.OprException;
 import com.w.saffron.common.utils.BeanUtil;
 import com.w.saffron.common.utils.TemplateUtil;
@@ -73,39 +72,38 @@ public class HorusService {
     public SaTokenInfo login(LoginBean loginBean){
         LoginTypeEnum loginTypeEnum = LoginTypeEnum.parse(loginBean.getLoginType());
         User findUser = null;
-        switch (loginTypeEnum){
-            case USERNAME_PASSWORD:
+        switch (loginTypeEnum) {
+            case USERNAME_PASSWORD -> {
                 String username = loginBean.getUsername();
                 String password = loginBean.getPassword();
-                if (StrUtil.isEmpty(username)){
+                if (StrUtil.isEmpty(username)) {
                     throw new OprException("username is empty!");
                 }
-                if (StrUtil.isEmpty(password)){
+                if (StrUtil.isEmpty(password)) {
                     throw new OprException("password is empty");
                 }
                 findUser = userService.findByUsername(username);
-                String aesKey = SaffronInfo.getAesKey();
+                String aesKey = "saffron";
                 String userPassword = findUser.getPassword();
-                String encryptPassword = SaSecureUtil.aesEncrypt(aesKey,password);
-                if (!StrUtil.equals(encryptPassword,userPassword)){
+                String encryptPassword = SaSecureUtil.aesEncrypt(aesKey, password);
+                if (!StrUtil.equals(encryptPassword, userPassword)) {
                     throw new OprException("password is incorrect!");
                 }
-                break;
-            case EMAIL_CODE:
+            }
+            case EMAIL_CODE -> {
                 String email = loginBean.getEmail();
                 String code = loginBean.getCode();
                 findUser = userService.findByEmail(email);
                 String cacheCode = RedisManager.get(email);
-                if (StrUtil.isEmpty(cacheCode)){
+                if (StrUtil.isEmpty(cacheCode)) {
                     throw new OprException("code is expire! please generate new");
                 }
-                if (!StrUtil.equals(code,cacheCode)){
+                if (!StrUtil.equals(code, cacheCode)) {
                     throw new OprException("code is incorrect!");
                 }
                 RedisManager.remove(email);
-                break;
-            case EMAIL_PASSWORD:
-                throw new OprException("not support loginType");
+            }
+            case EMAIL_PASSWORD -> throw new OprException("not support loginType");
         }
         if (findUser==null){
             throw new OprException("login error!");

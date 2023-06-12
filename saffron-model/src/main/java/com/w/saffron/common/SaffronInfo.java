@@ -36,8 +36,4 @@ public class SaffronInfo {
     public static  void cleanTemp(){
         FileUtil.clean(getTempPath());
     }
-
-    public static String getAesKey(){
-        return SpringUtil.getProperty("spring.saffron.system.aes-key");
-    }
 }

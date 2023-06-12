@@ -1,6 +1,5 @@
 package com.w.saffron.video.constant;
 
-import com.fasterxml.jackson.annotation.JsonValue;
 import com.w.saffron.common.enumrate.BaseEnum;
 import lombok.AllArgsConstructor;
 
@@ -24,7 +23,6 @@ public enum Status implements BaseEnum {
     }
 
     @Override
-    @JsonValue
     public String getDesc() {
         return desc;
     }
