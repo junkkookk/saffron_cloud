@@ -20,7 +20,7 @@ public class JobContext {
 
     public static void addJob(BaseJob baseJob){
         baseJob.config();
-        log.info("job开始配置：{}", JSONUtil.toJsonStr(baseJob));
+        log.info("Add Job {}", JSONUtil.toJsonStr(baseJob));
         JobInfo jobInfo = baseJob.getJobInfo();
         String jobId = jobInfo.getJobId();
         String desc = jobInfo.getDesc();
@@ -43,15 +43,15 @@ public class JobContext {
 
 
     public static void initGroup(){
-        XxlJobGroup xxlJobGroup = XxlClient.findJobGroupByAppName(SaffronInfo.APP_NAME);
-        log.info("初始化jobGroup:{}",JSONUtil.toJsonStr(xxlJobGroup));
+        XxlJobGroup xxlJobGroup = XxlClient.findJobGroupByAppName(SaffronInfo.getAppName());
+        log.info("Init JobGroup {}",JSONUtil.toJsonStr(xxlJobGroup));
         if (xxlJobGroup!=null){
             groupId = xxlJobGroup.getId();
         }else {
             xxlJobGroup = new XxlJobGroup();
-            xxlJobGroup.setAppname(SaffronInfo.APP_NAME);
+            xxlJobGroup.setAppname(SaffronInfo.getAppName());
             xxlJobGroup.setAddressType(0);
-            xxlJobGroup.setTitle(SaffronInfo.APP_NAME);
+            xxlJobGroup.setTitle(SaffronInfo.getAppName());
             groupId = XxlClient.createGroup(xxlJobGroup);
         }
     }

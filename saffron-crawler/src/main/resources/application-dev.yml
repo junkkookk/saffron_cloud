@@ -69,3 +69,6 @@ spring:
     app-name: saffron-crawler
     port: 10001
     log-retention-days: 30
+saffron:
+  enableJob: true
+  enableListener: true

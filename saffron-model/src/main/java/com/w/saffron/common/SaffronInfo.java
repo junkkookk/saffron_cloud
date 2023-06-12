@@ -1,39 +1,28 @@
 package com.w.saffron.common;
 
-import cn.hutool.core.io.FileUtil;
 import cn.hutool.extra.spring.SpringUtil;
-import lombok.extern.slf4j.Slf4j;
-
-import java.net.URL;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
 /**
  * @author w
  * @since 2023/3/6
  */
-@Slf4j
+@Component
+@ConfigurationProperties(prefix = "saffron", ignoreInvalidFields = true)
+@Getter
+@Setter
 public class SaffronInfo {
 
-    private final static String TEMP_PATH;
+    private Boolean enableJob;
 
+    private Boolean enableListener;
 
-
-    public final static String APP_NAME;
-
-    static {
-        URL url = Thread.currentThread().getContextClassLoader().getResource("");
-        String path = null;
-        if (url != null) {
-            path = url.getPath();
-        }
-        TEMP_PATH = path+ "temp/";
-        APP_NAME = SpringUtil.getProperty("spring.application.name");
+    public static String getAppName(){
+        return SpringUtil.getProperty("spring.application.name");
     }
 
-    public static String getTempPath() {
-        return TEMP_PATH;
-    }
 
-    public static  void cleanTemp(){
-        FileUtil.clean(getTempPath());
-    }
 }

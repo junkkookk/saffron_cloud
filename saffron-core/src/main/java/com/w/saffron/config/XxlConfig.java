@@ -1,7 +1,6 @@
 package com.w.saffron.config;
 
 import com.w.saffron.common.utils.NumberUtil;
-import com.w.saffron.schdule.JobContext;
 import com.w.saffron.schdule.XxlJobProperties;
 import com.xxl.job.core.executor.impl.XxlJobSpringExecutor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,6 @@ public class XxlConfig {
         jobSpringExecutor.setAccessToken(xxlJobProperties.getAccessToken());
         jobSpringExecutor.setPort(NumberUtil.toInt(xxlJobProperties.getPort()));
         jobSpringExecutor.setLogRetentionDays(xxlJobProperties.getLogRetentionDays());
-        JobContext.initGroup();
         return jobSpringExecutor;
     }
 
