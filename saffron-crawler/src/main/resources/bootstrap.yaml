@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: saffron-crawler
+  servlet:
+    multipart:
+      max-file-size: 2048MB
+      max-request-size: 2048MB
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_HOST:localhost}:8848
+        namespace: a38e8401-c010-494c-bfce-fbb15c7af754
+        group: SAFFRON_GROUP
+      config:
+        server-addr: ${NACOS_HOST:localhost}:8848
+        namespace: a38e8401-c010-494c-bfce-fbb15c7af754
+        file-extension: yml
+        group: SAFFRON_GROUP
+        shared-configs:
+          - dataId: log.yml
+            group: COMMON
+            refresh: true
+          - dataId: base.yml
+            group: COMMON
+            refresh: true
+logging:
+  level:
+    root: error

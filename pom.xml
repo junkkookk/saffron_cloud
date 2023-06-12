@@ -24,6 +24,8 @@
 		<java.version>17</java.version>
 		<saffron.version>1.0.0</saffron.version>
 		<spring-boot.version>3.0.6</spring-boot.version>
+		<spring-cloud.version>2022.0.0</spring-cloud.version>
+		<spring-cloud-alibaba.version>2022.0.0.0-RC1</spring-cloud-alibaba.version>
 		<hutool.version>5.8.15</hutool.version>
 		<mapstruct.version>1.2.2</mapstruct.version>
 		<javacv.version>1.4.3</javacv.version>
@@ -46,7 +48,24 @@
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-dependencies</artifactId>
-				<version>3.0.6</version>
+				<version>${spring-boot.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
+			<!-- spring-cloud-dependencies -->
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>2022.0.0</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>com.alibaba.cloud</groupId>
+				<artifactId>spring-cloud-alibaba-dependencies</artifactId>
+				<version>2022.0.0.0-RC1</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>

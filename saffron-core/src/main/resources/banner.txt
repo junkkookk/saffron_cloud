@@ -1,0 +1,10 @@
+${AnsiColor.RED}
+ .-.    .    .---..---..--.  .--. .   .
+(   )  / \   |    |    |   ):    :|\  |
+ `-.  /___\  |--- |--- |--' |    || \ |
+(   )/     \ |    |    |  \ :    ;|  \|
+ `-''       `'    '    '   ` `--' '   '
+${AnsiColor.BRIGHT_YELLOW}
+::: Spring-Boot ${spring-boot.formatted-version} :::
+::: Powered by W.         :::
+${AnsiColor.BLACK}

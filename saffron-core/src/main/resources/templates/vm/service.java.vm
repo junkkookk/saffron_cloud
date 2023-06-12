@@ -1,0 +1,61 @@
+package ${package.Service};
+
+import ${package.Entity}.${entity};
+import ${package.Mapper}.${table.mapperName};
+import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+
+/**
+ * $!{table.comment} 服务类
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+#if(${kotlin})
+interface ${table.serviceName} : ${superServiceClass}<${entity}>
+#else
+@Service
+public class ${table.serviceName} {
+
+    private final ${table.mapperName} ${table.entityPath}Dao;
+
+    @Autowired
+    public ${table.serviceName}(${table.mapperName} ${table.entityPath}Dao) {
+        this.${table.entityPath}Dao = ${table.entityPath}Dao;
+    }
+
+
+    public ${entity} findById(Long id){
+        return ${table.entityPath}Dao.findById(id).orElseThrow(()->{throw new OprException(ResultCode.NOT_FOUND);});
+    }
+
+    public void save(${entity} ${table.entityPath}){
+        if (${table.entityPath}.getId()!=null){
+            update(${table.entityPath});
+        }else {
+            ${table.entityPath}Dao.save(${table.entityPath});
+        }
+    }
+
+     public void update(${entity} ${table.entityPath}) {
+        Long id = ${table.entityPath}.getId();
+        ${table.entityPath}Dao.findById(id).ifPresent(dbObj -> {
+            BeanUtil.copy(${table.entityPath},dbObj);
+            ${table.entityPath}Dao.save(dbObj);
+        });
+    }
+
+    public void deleteById(Long id){
+        ${table.entityPath}Dao.deleteById(id);
+    }
+
+    public PageResult<${entity}> findList(Integer current,Integer pageSize, ${entity} ${table.entityPath}){
+        if (${table.entityPath}==null){
+            ${table.entityPath} = new ${entity}();
+        }
+        return PageResult.of(${table.entityPath}Dao.findAll(Example.of(${table.entityPath}),PageParam.of(current,pageSize)
+                .withSort(Sort.by(Sort.Direction.DESC,"createTime"))));
+    }
+
+}
+#end
