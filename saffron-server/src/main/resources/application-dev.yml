@@ -53,11 +53,6 @@ spring:
     accessKey: saffron
     secretKey: saffron123
   data:
-    mongodb:
-      host: ${MONGO_HOST:mongo}
-      database: saffron
-      username: root
-      password: '123456'
     redis:
       host: ${REDIS_HOST:redis}
       database: 0

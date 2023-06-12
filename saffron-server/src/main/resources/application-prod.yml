@@ -60,11 +60,6 @@ spring:
       aes-key: saffron
       init-task: ${INIT_TASK:false}
   data:
-    mongodb:
-      host: ${MONGO_HOST:mongo}
-      database: saffron
-      username: root
-      password: '123456'
     redis:
       host: ${REDIS_HOST:redis}
       database: 0
