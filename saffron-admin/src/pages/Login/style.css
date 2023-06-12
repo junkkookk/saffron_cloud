@@ -1,0 +1,21 @@
+
+@media (min-width: 768px) {
+  .ant-pro-form-login-page-container{
+    padding-block-start: 0;
+    padding-block-end: 0;
+    justify-content: center !important;
+  }
+
+}
+
+/*.ant-pro-form-api-page{*/
+/*  background-size: cover;*/
+/*  background-position: center;*/
+/*}*/
+
+.ant-pro-form-login-page-other {
+  margin-top: 12px;
+}
+.ant-pro-form-login-page-container{
+  justify-content: center !important;
+}
