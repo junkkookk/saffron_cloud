@@ -23,6 +23,9 @@ spring:
           - dataId: base.yml
             group: COMMON
             refresh: true
+          - dataId: sa-token.yml
+            group: COMMON
+            refresh: true
 logging:
   level:
     root: error

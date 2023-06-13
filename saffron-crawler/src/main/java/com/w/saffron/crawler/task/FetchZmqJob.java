@@ -1,8 +1,8 @@
 package com.w.saffron.crawler.task;
 
 import cn.hutool.extra.spring.SpringUtil;
-import com.w.saffron.crawler.service.VideoService;
 import com.w.saffron.crawler.service.ZmqService;
+import com.w.saffron.rpc.server.v100.VideoInterface;
 import com.w.saffron.schdule.BaseJob;
 import com.w.saffron.schdule.ScheduleBuilder;
 import com.w.saffron.video.bean.VideoRequest;
@@ -31,7 +31,7 @@ public class FetchZmqJob extends BaseJob {
     protected ReturnT<String> run() {
         log.info("开始爬取zmq视频");
         ZmqService zmqService = SpringUtil.getBean(ZmqService.class);
-        VideoService videoService = SpringUtil.getBean(VideoService.class);
+        VideoInterface videoInterface = SpringUtil.getBean(VideoInterface.class);
         int page = 1;
         boolean hasMore = true;
         int totalCount=0;
@@ -41,8 +41,8 @@ public class FetchZmqJob extends BaseJob {
             page++;
             for (VideoRequest.SaveOrUpdate saveOrUpdate : videoReqList) {
                 try {
-                    videoService.saveOrUpdate(saveOrUpdate);
-                    log.info("入库成功"+saveOrUpdate.getUuid());
+                    videoInterface.addVideo(saveOrUpdate);
+                    log.info("入库成功:{}", saveOrUpdate.getTitle());
                     count++;
                 }catch (Exception e){
                     log.error("入库出错："+ e.getMessage());

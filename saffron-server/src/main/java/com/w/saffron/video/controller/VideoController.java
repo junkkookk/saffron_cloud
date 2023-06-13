@@ -6,10 +6,14 @@ import com.w.saffron.common.constant.Insert;
 import com.w.saffron.common.constant.Update;
 import com.w.saffron.video.bean.VideoRequest;
 import com.w.saffron.video.domain.Video;
+import com.w.saffron.video.dto.VideoDto;
 import com.w.saffron.video.service.VideoService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author w
@@ -17,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("video")
+@Valid
 public class VideoController {
 
     private final VideoService videoService;
@@ -43,12 +48,16 @@ public class VideoController {
         return R.ok();
     }
 
-    @GetMapping("search")
-    public R<?> search(Integer current,Integer pageSize){
-        return R.ok(videoService.search(current,pageSize));
+    @PostMapping("search")
+    public R<?> search(@RequestBody VideoDto videoDto){
+        return R.ok(videoService.search(videoDto));
     }
 
-
+    @DeleteMapping
+    public R<?> deleteByIds(@RequestBody List<Long> ids){
+        videoService.deleteByIds(ids);
+        return R.ok();
+    }
 
 
 }

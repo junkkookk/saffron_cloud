@@ -1,9 +1,6 @@
 package com.w.saffron;
 
-import com.w.saffron.config.AmqpConfig;
-import com.w.saffron.config.JpaConfig;
-import com.w.saffron.config.MinioConfig;
-import com.w.saffron.config.MvcConfig;
+import com.w.saffron.config.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration;
@@ -29,7 +26,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
                 MvcConfig.class,
                 MinioConfig.class,
                 AmqpConfig.class,
-
+                SecurityConfig.class
         }),
         @ComponentScan.Filter(type = FilterType.ANNOTATION,classes = {
                 Controller.class, ControllerAdvice.class

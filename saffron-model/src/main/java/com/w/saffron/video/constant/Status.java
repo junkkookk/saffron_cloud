@@ -11,7 +11,8 @@ import lombok.AllArgsConstructor;
 public enum Status implements BaseEnum {
 
     DEFAULT(0,"未采集"),
-    READY(1,"已采集");
+    READY(1,"已采集"),
+    ERROR(2,"采集失败");
 
     private final Integer code;
 

@@ -4,6 +4,7 @@ package com.w.saffron.system.controller;
 import com.w.saffron.common.PageResult;
 import com.w.saffron.common.R;
 import com.w.saffron.system.bean.UserBean;
+import com.w.saffron.system.domain.User;
 import com.w.saffron.system.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,6 +31,10 @@ public class UserController {
         return R.ok(userService.findPage(current,pageSize, searchText,userBean));
     }
 
+    @GetMapping(value = "find-by-id")
+    public R<User> findById(Long userId){
+        return R.ok(userService.findById(userId));
+    }
 
 
 }

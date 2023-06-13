@@ -2,6 +2,7 @@ package com.w.saffron.exception;
 
 
 
+import cn.hutool.core.util.StrUtil;
 import com.w.saffron.common.R;
 import com.w.saffron.common.exception.OprException;
 import lombok.extern.slf4j.Slf4j;
@@ -42,6 +43,8 @@ public class CustomExceptionHandler {
         List<FieldError> errors = e.getBindingResult().getFieldErrors();
         List<String> msgList = errors.stream()
                 .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                .filter(StrUtil::isNotBlank)
+                .sorted()
                 .collect(Collectors.toList());
         return R.error()
                 .msg("请求参数错误")

@@ -22,8 +22,15 @@ public class PageParam {
     }
 
     public PageRequest firstPage(){
-        return of(1,20);
+        return of(0,20);
     }
+
+    public PageRequest of(BaseDto baseDto){
+        return PageRequest.of(baseDto.getCurrent() - 1, baseDto.getPageSize())
+                .withSort(Sort.by(Sort.Direction.fromString(baseDto.getSortOrder()),baseDto.getSortKey()));
+    }
+
+
 
 
 }

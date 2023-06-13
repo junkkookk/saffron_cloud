@@ -7,14 +7,18 @@ import com.w.saffron.common.ResultCode;
 import com.w.saffron.common.exception.OprException;
 import com.w.saffron.common.utils.BeanUtil;
 import com.w.saffron.video.bean.VideoRequest;
-import com.w.saffron.video.constant.Status;
 import com.w.saffron.video.dao.VideoDao;
 import com.w.saffron.video.domain.Video;
+import com.w.saffron.video.dto.VideoDto;
 import io.github.linpeilie.Converter;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import java.text.MessageFormat;
+import java.util.List;
 
 /**
  * @author w
@@ -36,6 +40,7 @@ public class VideoService {
     /**
      * 添加视频
      */
+
     public void saveOrUpdate(VideoRequest.SaveOrUpdate req){
        if (req.getId()!=null){
            videoDao.findById(req.getId()).ifPresentOrElse(video -> {
@@ -57,7 +62,18 @@ public class VideoService {
         return videoDao.findById(id).orElseThrow();
     }
 
-    public PageResult<Video> search(Integer current, Integer pageSize) {
-        return PageResult.of(videoDao.findPageByStatus(Status.READY, PageParam.of(current,pageSize)));
+    public PageResult<Video> search(VideoDto videoDto) {
+        ExampleMatcher matcher = ExampleMatcher.matching();
+        return PageResult.of(
+                videoDao.findAll(
+                        Example.of(converter.convert(videoDto,Video.class), matcher.withMatcher("title",
+                                ExampleMatcher.GenericPropertyMatcher.of(ExampleMatcher.StringMatcher.CONTAINING))),
+                        PageParam.of(videoDto)
+                ));
+    }
+
+    @Transactional(rollbackOn = Exception.class)
+    public void deleteByIds(List<Long> ids) {
+        ids.forEach(videoDao::deleteById);
     }
 }

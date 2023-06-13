@@ -15,7 +15,6 @@ public class MvcConfig implements WebMvcConfigurer {
     public void configurePathMatch(PathMatchConfigurer configurer){
         configurer.setUseTrailingSlashMatch(true);
         configurer.setUseSuffixPatternMatch(true);
+
     }
-
-
 }

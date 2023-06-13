@@ -1,5 +1,6 @@
 package com.w.saffron.delegate;
 
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.spring.SpringUtil;
 import com.w.saffron.common.SaffronInfo;
 import com.w.saffron.schdule.BaseJob;
@@ -7,8 +8,7 @@ import com.w.saffron.schdule.JobContext;
 import com.w.saffron.schdule.JobManager;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.context.event.EventListener;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
@@ -20,16 +20,21 @@ import java.util.List;
  */
 @Slf4j
 @Component
-public class BaseListener{
+public class BaseListener implements CommandLineRunner {
 
     @Autowired
     SaffronInfo saffronInfo;
-    @EventListener
-    public void onApplicationEvent(ContextRefreshedEvent event){
+
+    @Override
+    public void run(String... args) throws Exception {
         log.info("Application: {} listening {}",
                 SpringUtil.getProperty("spring.application.name"),
                 SpringUtil.getProperty("server.port"));
-        log.info("Context-path: {}",SpringUtil.getProperty("server.servlet.context-path"));
+        String contextPath = SpringUtil.getProperty("server.servlet.context-path");
+        if (StrUtil.isEmpty(contextPath)){
+            contextPath = SpringUtil.getProperty("server.webflux.base-path");
+        }
+        log.info("Context-path: {}", contextPath);
         Collection<ApplicationStart> applicationStarts = SpringUtil.getBeansOfType(ApplicationStart.class).values();
         if (saffronInfo.getEnableListener()){
             applicationStarts.forEach(ApplicationStart::init);
@@ -42,5 +47,4 @@ public class BaseListener{
             });
         }
     }
-
 }

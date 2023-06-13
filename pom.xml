@@ -19,6 +19,7 @@
 		<module>saffron-core</module>
         <module>saffron-crawler</module>
         <module>saffron-gate</module>
+        <module>saffron-rpc</module>
     </modules>
 	<packaging>pom</packaging>
 	<properties>
@@ -43,6 +44,7 @@
 		<jieba.version>1.0.2</jieba.version>
 		<xxl-job.version>2.4.0</xxl-job.version>
 		<jackson.version>2.15.1</jackson.version>
+		<feign.version>12.3</feign.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>

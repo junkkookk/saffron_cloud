@@ -2,6 +2,7 @@ package com.w.saffron.listener;
 
 import com.w.saffron.crawler.task.CheckStatusJob;
 import com.w.saffron.crawler.task.FetchZmqJob;
+import com.w.saffron.crawler.task.TestJob;
 import com.w.saffron.delegate.ApplicationStart;
 import com.w.saffron.schdule.BaseJob;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +21,8 @@ public class SaffronCrawlerStart implements ApplicationStart {
     public List<BaseJob> getInitJobs() {
         return List.of(
                 new FetchZmqJob(),
-                new CheckStatusJob()
+                new CheckStatusJob(),
+                new TestJob()
         );
     }
 
