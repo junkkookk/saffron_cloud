@@ -16,10 +16,10 @@
 	<modules>
 		<module>saffron-model</module>
 		<module>saffron-server</module>
-		<module>saffron-core</module>
         <module>saffron-crawler</module>
         <module>saffron-gate</module>
         <module>saffron-rpc</module>
+        <module>saffron-framework</module>
     </modules>
 	<packaging>pom</packaging>
 	<properties>
@@ -28,6 +28,7 @@
 		<spring-boot.version>3.0.6</spring-boot.version>
 		<spring-cloud.version>2022.0.0</spring-cloud.version>
 		<spring-cloud-alibaba.version>2022.0.0.0-RC1</spring-cloud-alibaba.version>
+		<spring-gateway.version>4.0.0</spring-gateway.version>
 		<hutool.version>5.8.15</hutool.version>
 		<mapstruct.version>1.2.2</mapstruct.version>
 		<javacv.version>1.4.3</javacv.version>
@@ -45,9 +46,25 @@
 		<xxl-job.version>2.4.0</xxl-job.version>
 		<jackson.version>2.15.1</jackson.version>
 		<feign.version>12.3</feign.version>
+		<docker-plugin.version>1.4.13</docker-plugin.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
+			<dependency>
+				<groupId>com.w</groupId>
+				<artifactId>saffron-model</artifactId>
+				<version>${saffron.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.w</groupId>
+				<artifactId>saffron-core</artifactId>
+				<version>${saffron.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.w</groupId>
+				<artifactId>saffron-rpc</artifactId>
+				<version>${saffron.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-dependencies</artifactId>
@@ -60,7 +77,7 @@
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-dependencies</artifactId>
-				<version>2022.0.0</version>
+				<version>${spring-cloud.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -68,7 +85,7 @@
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-gateway-dependencies</artifactId>
-				<version>4.0.0</version>
+				<version>${spring-gateway.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -76,7 +93,7 @@
 			<dependency>
 				<groupId>com.alibaba.cloud</groupId>
 				<artifactId>spring-cloud-alibaba-dependencies</artifactId>
-				<version>2022.0.0.0-RC1</version>
+				<version>${spring-cloud-alibaba.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -170,24 +187,6 @@
 			</dependency>
 
 			<dependency>
-				<groupId>com.baomidou</groupId>
-				<artifactId>mybatis-plus-generator</artifactId>
-				<version>${mp-generator.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>com.baomidou</groupId>
-				<artifactId>mybatis-plus-core</artifactId>
-				<version>${mp-generator.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.apache.velocity</groupId>
-				<artifactId>velocity-engine-core</artifactId>
-				<version>${velocity.version}</version>
-			</dependency>
-
-			<dependency>
 				<groupId>com.huaban</groupId>
 				<artifactId>jieba-analysis</artifactId>
 				<version>${jieba.version}</version>
@@ -198,7 +197,16 @@
 				<artifactId>xxl-job-core</artifactId>
 				<version>${xxl-job.version}</version>
 			</dependency>
-
+			<dependency>
+				<groupId>jakarta.validation</groupId>
+				<artifactId>jakarta.validation-api</artifactId>
+				<version>${jakarta-validation.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.github.openfeign</groupId>
+				<artifactId>feign-okhttp</artifactId>
+				<version>${feign.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 

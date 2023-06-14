@@ -2,7 +2,6 @@ package com.w.saffron.system.controller;
 
 
 import com.w.saffron.common.PageResult;
-import com.w.saffron.common.R;
 import com.w.saffron.system.bean.UserBean;
 import com.w.saffron.system.domain.User;
 import com.w.saffron.system.service.UserService;

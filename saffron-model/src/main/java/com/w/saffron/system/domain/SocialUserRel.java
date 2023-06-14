@@ -1,9 +1,8 @@
-package com.w.saffron.application.sys.domain;
+package com.w.saffron.system.domain;
 
 import com.w.saffron.common.BaseEntity;
 import lombok.*;
 import lombok.experimental.Accessors;
-import org.hibernate.annotations.DynamicUpdate;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -18,7 +17,6 @@ import jakarta.persistence.Table;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@DynamicUpdate
 @ToString
 @Builder
 @Accessors(chain = true)

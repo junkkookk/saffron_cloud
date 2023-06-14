@@ -5,15 +5,12 @@ server:
   servlet:
     context-path: /saffron-crawler
 spring:
-  sql:
-    init:
-      username: root
-      password: 123456
-      mode: NEVER
+  application:
+    name: crawler-server
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     name: defaultDataSource
-    url: jdbc:mysql://${MYSQL_HOST:mysql}:3306/saffron_chaos?serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://${MYSQL_HOST:127.0.0.1}:3306/saffron_chaos?serverTimezone=Asia/Shanghai
     username: root
     password: 123456
     hikari:
@@ -36,28 +33,28 @@ spring:
           starttls:
             enable: true
             required: true
-  rabbitmq:
-    host: ${MYSQL_HOST:rabbitmq}
-    port: 5672
-    username: guest
-    password: guest
-    virtual-host: /
-    listener:
-      direct:
-        acknowledge-mode: auto
-  minio:
-    bucket: saffron
-    endpoint: http://${MINIO_HOST:minio}:9000
-    accessKey: saffron
-    secretKey: saffron123
-  data:
-    redis:
-      host: ${REDIS_HOST:redis}
-      database: 0
-      port: 6379
-      timeout: 10s
-  elasticsearch:
-    uris: http://${ES_HOST:es}:9200
+#  rabbitmq:
+#    host: ${MYSQL_HOST:rabbitmq}
+#    port: 5672
+#    username: guest
+#    password: guest
+#    virtual-host: /
+#    listener:
+#      direct:
+#        acknowledge-mode: auto
+#  minio:
+#    bucket: saffron
+#    endpoint: http://${MINIO_HOST:minio}:9000
+#    accessKey: saffron
+#    secretKey: saffron123
+#  data:
+#    redis:
+#      host: ${REDIS_HOST:redis}
+#      database: 0
+#      port: 6379
+#      timeout: 10s
+#  elasticsearch:
+#    uris: http://${ES_HOST:es}:9200
   jpa:
     show-sql: false
     hibernate:
@@ -72,3 +69,7 @@ spring:
 saffron:
   enableJob: true
   enableListener: true
+logging:
+  level:
+    root: error
+    com.w.saffron: info

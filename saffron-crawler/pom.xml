@@ -20,13 +20,26 @@
     <dependencies>
         <dependency>
             <groupId>com.w</groupId>
-            <artifactId>saffron-model</artifactId>
-            <version>${saffron.version}</version>
+            <artifactId>saffron-web</artifactId>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.w</groupId>
-            <artifactId>saffron-core</artifactId>
-            <version>${saffron.version}</version>
+            <artifactId>saffron-job</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.w</groupId>-->
+<!--            <artifactId>saffron-db</artifactId>-->
+<!--            <version>1.0.0</version>-->
+<!--        </dependency>-->
+        <dependency>
+            <groupId>com.w</groupId>
+            <artifactId>saffron-model</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.w</groupId>
+            <artifactId>saffron-rpc</artifactId>
         </dependency>
     </dependencies>
     <build>
@@ -48,6 +61,7 @@
             <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>dockerfile-maven-plugin</artifactId>
+                <version>${docker-plugin.version}</version>
                 <executions>
                     <execution>
                         <id>default</id>

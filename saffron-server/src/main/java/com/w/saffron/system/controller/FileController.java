@@ -1,7 +1,6 @@
 package com.w.saffron.system.controller;
 
 import cn.hutool.core.util.StrUtil;
-import com.w.saffron.common.R;
 import com.w.saffron.minio.MinioManager;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

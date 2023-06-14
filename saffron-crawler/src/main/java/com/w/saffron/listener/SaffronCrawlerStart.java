@@ -5,6 +5,7 @@ import com.w.saffron.crawler.task.FetchZmqJob;
 import com.w.saffron.crawler.task.TestJob;
 import com.w.saffron.delegate.ApplicationStart;
 import com.w.saffron.schdule.BaseJob;
+import com.w.saffron.schdule.JobManager;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -17,17 +18,15 @@ import java.util.List;
 @Slf4j
 @Component
 public class SaffronCrawlerStart implements ApplicationStart {
+
     @Override
-    public List<BaseJob> getInitJobs() {
-        return List.of(
+    public void init() {
+        List<BaseJob> baseJobs = List.of(
                 new FetchZmqJob(),
                 new CheckStatusJob(),
                 new TestJob()
         );
-    }
 
-    @Override
-    public void init() {
-
+        JobManager.addJob(baseJobs);
     }
 }

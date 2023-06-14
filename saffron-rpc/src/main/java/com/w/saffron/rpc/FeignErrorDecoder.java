@@ -1,7 +1,7 @@
 package com.w.saffron.rpc;
 
 import com.w.saffron.common.R;
-import com.w.saffron.common.exception.OprException;
+import com.w.saffron.exception.OprException;
 import feign.FeignException;
 import feign.Response;
 import feign.codec.DecodeException;

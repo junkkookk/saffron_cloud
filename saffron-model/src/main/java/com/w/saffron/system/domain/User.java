@@ -9,7 +9,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.*;
 import lombok.experimental.Accessors;
-import org.hibernate.annotations.DynamicUpdate;
 
 import java.util.Date;
 
@@ -23,7 +22,6 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@DynamicUpdate
 @ToString
 @Builder
 @Accessors(chain = true)

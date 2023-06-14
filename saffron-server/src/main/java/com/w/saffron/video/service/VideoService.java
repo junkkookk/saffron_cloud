@@ -3,7 +3,6 @@ package com.w.saffron.video.service;
 
 import com.w.saffron.common.PageParam;
 import com.w.saffron.common.PageResult;
-import com.w.saffron.common.ResultCode;
 import com.w.saffron.common.exception.OprException;
 import com.w.saffron.common.utils.BeanUtil;
 import com.w.saffron.video.bean.VideoRequest;
