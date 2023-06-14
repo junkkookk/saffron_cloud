@@ -1,6 +1,5 @@
 package com.w.saffron;
 
-import com.w.saffron.config.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration;
@@ -21,13 +20,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
                 HibernateJpaAutoConfiguration.class}
 )
 @ComponentScan(basePackages = "com.w.saffron",excludeFilters = {
-        @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE,classes = {
-                JpaConfig.class,
-                MvcConfig.class,
-                MinioConfig.class,
-                AmqpConfig.class,
-                SecurityConfig.class
-        }),
         @ComponentScan.Filter(type = FilterType.ANNOTATION,classes = {
                 Controller.class, ControllerAdvice.class
         })

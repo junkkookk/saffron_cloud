@@ -5,13 +5,17 @@ import cn.dev33.satoken.router.SaRouter;
 import cn.dev33.satoken.same.SaSameUtil;
 import cn.dev33.satoken.stp.StpInterface;
 import cn.dev33.satoken.stp.StpUtil;
+import cn.hutool.core.util.StrUtil;
+import cn.hutool.extra.spring.SpringUtil;
 import cn.hutool.json.JSONUtil;
+import com.w.saffron.common.R;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.web.server.ServerWebExchange;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -34,10 +38,19 @@ public class GateSecurityConfig {
                 // 鉴权方法：每次访问进入
                 .setAuth(obj -> {
                     // 登录校验 -- 拦截所有路由，并排除/user/doLogin 用于开放登录
-                    SaRouter.match("/**", "/saffron-server/login", r -> StpUtil.checkLogin());
+                    SaRouter.match("/**").notMatch(getWhiteUrl()).check( r -> StpUtil.checkLogin());
                 })
                 // 异常处理方法：每次setAuth函数出现异常时进入
                 .setError(e -> JSONUtil.parseObj(R.error().msg(e.getMessage())));
+    }
+
+    private String[] getWhiteUrl() {
+        List<String> whiteUrl = new ArrayList<>();
+        String whiteUrls = SpringUtil.getProperty("saffron.white-urls");
+        if (StrUtil.isNotEmpty(whiteUrls)){
+            whiteUrl.addAll( StrUtil.split(whiteUrls, ","));
+        }
+        return whiteUrl.toArray(new String[0]);
     }
 
     @Bean

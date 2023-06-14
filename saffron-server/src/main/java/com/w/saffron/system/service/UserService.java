@@ -3,7 +3,7 @@ package com.w.saffron.system.service;
 
 import com.w.saffron.common.PageParam;
 import com.w.saffron.common.PageResult;
-import com.w.saffron.common.exception.OprException;
+import com.w.saffron.exception.OprException;
 import com.w.saffron.system.bean.UserBean;
 import com.w.saffron.system.dao.UserDao;
 import com.w.saffron.system.domain.User;

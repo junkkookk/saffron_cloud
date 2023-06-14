@@ -1,0 +1,11 @@
+{
+  "accentColor": "#6d6a95",
+  "cssTheme": "Atom",
+  "theme": "moonstone",
+  "interfaceFontFamily": "HarmonyOS Sans SC",
+  "textFontFamily": "HarmonyOS Sans SC",
+  "monospaceFontFamily": "Source Code Pro",
+  "baseFontSize": 20,
+  "nativeMenus": false,
+  "translucency": false
+}

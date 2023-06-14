@@ -5,7 +5,6 @@ import com.w.saffron.schdule.JobContext;
 import com.w.saffron.tool.SaffronInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -25,7 +24,12 @@ public class XxlJobStart implements ApplicationStart {
         Boolean enableJob = saffronInfo.getEnableJob();
         if (enableJob!=null&&enableJob){
             log.info("Starting int jobGroup...");
-            JobContext.initGroup();
+            try {
+                JobContext.initGroup();
+            }catch (Exception e){
+                log.error("Init jobGroup error {}",e.getMessage());
+            }
+
         }
     }
 }

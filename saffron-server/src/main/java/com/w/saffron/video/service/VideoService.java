@@ -3,8 +3,9 @@ package com.w.saffron.video.service;
 
 import com.w.saffron.common.PageParam;
 import com.w.saffron.common.PageResult;
-import com.w.saffron.common.exception.OprException;
-import com.w.saffron.common.utils.BeanUtil;
+import com.w.saffron.exception.OprException;
+import com.w.saffron.exception.ResultCode;
+import com.w.saffron.utils.BeanUtil;
 import com.w.saffron.video.bean.VideoRequest;
 import com.w.saffron.video.dao.VideoDao;
 import com.w.saffron.video.domain.Video;

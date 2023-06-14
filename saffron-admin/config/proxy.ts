@@ -14,12 +14,12 @@ export default {
   dev: {
     // localhost:8000/api/** -> https://preview.pro.ant.design/api/**
     "/saffron-server":{
-      target: "http://127.0.0.1:20021",
+      target: "http://127.0.0.1:20020",
       changeOrigin: true,
       pathRewrite: { '^/saffron-server': '/saffron-server' },
     },
     "/saffron_files":{
-      target: "http://127.0.0.1:20021",
+      target: "http://127.0.0.1:20020",
       changeOrigin: true,
       pathRewrite: { '^/saffron_files': '/saffron-server/file/preview/saffron_files' },
     }

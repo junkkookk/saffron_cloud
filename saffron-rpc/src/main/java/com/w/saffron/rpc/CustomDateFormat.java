@@ -1,6 +1,7 @@
-package com.w.saffron.config;
+package com.w.saffron.rpc;
 
-import com.w.saffron.common.exception.OprException;
+
+import com.w.saffron.exception.OprException;
 
 import java.text.*;
 import java.util.Calendar;
@@ -11,12 +12,12 @@ import java.util.Locale;
  * @author w
  * @since 2023/6/13
  */
-public class GateDateFormat extends DateFormat {
+public class CustomDateFormat extends DateFormat {
     private DateFormat dateFormat;
 
     private SimpleDateFormat format1 = new SimpleDateFormat("yyy-MM-dd HH:mm:ss");
 
-    public GateDateFormat(DateFormat dateFormat){
+    public CustomDateFormat(DateFormat dateFormat){
         this.dateFormat = dateFormat;
         this.calendar = Calendar.getInstance(Locale.CHINA);
         this.numberFormat = NumberFormat.getInstance(Locale.CHINA);
@@ -70,6 +71,6 @@ public class GateDateFormat extends DateFormat {
     @Override
     public Object clone() {
         Object format = dateFormat.clone();
-        return new GateDateFormat((DateFormat) format);
+        return new CustomDateFormat((DateFormat) format);
     }
 }

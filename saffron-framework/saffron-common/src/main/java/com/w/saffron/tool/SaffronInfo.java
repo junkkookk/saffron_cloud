@@ -21,7 +21,7 @@ public class SaffronInfo {
     private Boolean enableListener;
 
     public static String getAppName(){
-        return SpringUtil.getProperty("spring.application.name");
+        return SpringUtil.getProperty("spring.application.name").toUpperCase();
     }
 
 

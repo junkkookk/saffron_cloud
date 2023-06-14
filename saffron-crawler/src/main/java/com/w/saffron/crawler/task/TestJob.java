@@ -24,9 +24,8 @@ public class TestJob extends BaseJob {
     protected ReturnT<String> run() {
         VideoInterface videoInterface = SpringUtil.getBean(VideoInterface.class);
         try {
-            System.out.println(videoInterface.updateVideo(
+            System.out.println(videoInterface.addVideo(
                     VideoRequest.SaveOrUpdate.builder()
-                            .id(29664L)
                             .uuid("aaa")
                             .build()
             ));

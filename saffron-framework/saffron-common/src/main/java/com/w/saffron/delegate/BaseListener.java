@@ -6,9 +6,12 @@ import com.w.saffron.tool.SaffronInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.annotation.AnnotationAwareOrderComparator;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * @author w
@@ -22,7 +25,7 @@ public class BaseListener implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         log.info("Application: {} listening {}",
-                SpringUtil.getProperty("spring.application.name"),
+                SaffronInfo.getAppName(),
                 SpringUtil.getProperty("server.port"));
         String contextPath = SpringUtil.getProperty("server.servlet.context-path");
         if (StrUtil.isEmpty(contextPath)){
@@ -30,8 +33,12 @@ public class BaseListener implements CommandLineRunner {
         }
         log.info("Context-path: {}", contextPath);
         Collection<ApplicationStart> applicationStarts = SpringUtil.getBeansOfType(ApplicationStart.class).values();
-        if (saffronInfo.getEnableListener()){
-            applicationStarts.stream().sorted().forEach(ApplicationStart::init);
+        Boolean enableListener = saffronInfo.getEnableListener();
+        if (enableListener!=null&&enableListener){
+            List<ApplicationStart> applicationStartList = new ArrayList<>(applicationStarts);
+            applicationStartList.sort(AnnotationAwareOrderComparator.INSTANCE);
+            applicationStartList.forEach(ApplicationStart::init);
         }
+        log.info(SaffronInfo.getAppName()+"  started");
     }
 }

@@ -1,8 +1,8 @@
 package com.w.saffron.system.service;
 
 
-import com.w.saffron.application.sys.domain.SocialUserRel;
 import com.w.saffron.system.dao.SocialUserRelDao;
+import com.w.saffron.system.domain.SocialUserRel;
 import org.springframework.stereotype.Service;
 
 /**

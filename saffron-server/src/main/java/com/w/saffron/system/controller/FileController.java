@@ -1,13 +1,20 @@
 package com.w.saffron.system.controller;
 
+import cn.hutool.core.io.file.FileNameUtil;
 import cn.hutool.core.util.StrUtil;
+import com.w.saffron.common.R;
+import com.w.saffron.exception.OprException;
 import com.w.saffron.minio.MinioManager;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.http.MediaType;
+import org.springframework.http.MediaTypeFactory;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
 /**
@@ -41,7 +48,14 @@ public class FileController {
         String requestUrl = request.getRequestURI();
         String fullName = requestUrl.split("/preview")[1];
         fullName = URLDecoder.decode(fullName, StandardCharsets.UTF_8);
-        MinioManager.preview(fullName,response);
+        try {
+            response.setContentType(MediaTypeFactory.getMediaType(fullName).orElse(MediaType.APPLICATION_OCTET_STREAM).toString());
+            response.setHeader("Content-Disposition", "inline; filename=" + URLEncoder.encode(FileNameUtil.getName(fullName), StandardCharsets.UTF_8));
+            MinioManager.preview(fullName,response.getOutputStream());
+            response.getOutputStream().flush();
+        } catch (IOException e) {
+            throw new OprException(e.getMessage());
+        }
     }
 
 

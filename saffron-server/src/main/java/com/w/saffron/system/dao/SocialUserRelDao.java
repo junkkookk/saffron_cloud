@@ -1,6 +1,7 @@
 package com.w.saffron.system.dao;
 
-import com.w.saffron.application.sys.domain.SocialUserRel;
+
+import com.w.saffron.system.domain.SocialUserRel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

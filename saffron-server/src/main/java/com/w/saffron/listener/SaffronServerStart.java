@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 public class SaffronServerStart implements ApplicationStart {
     @Override
     public void init() {
-        log.info("Saffron-Server start init...");
     }
 
 }

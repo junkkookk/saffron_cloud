@@ -2,6 +2,7 @@ package com.w.saffron.rpc.server.v100;
 
 import com.w.saffron.common.PageResult;
 import com.w.saffron.common.R;
+import com.w.saffron.rpc.FeignInterceptor;
 import com.w.saffron.video.bean.VideoRequest;
 import com.w.saffron.video.domain.Video;
 import com.w.saffron.video.dto.VideoDto;
@@ -17,7 +18,11 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author w
  * @since 2023/6/13
  */
-@FeignClient(name = "saffron-server",contextId = "video")
+@FeignClient(
+        name = "saffron-server",
+        contextId = "video",
+        configuration = FeignInterceptor.class
+)
 public interface VideoInterface {
 
     @GetMapping("/saffron-server/video/find-by-id")

@@ -6,6 +6,5 @@ ${AnsiColor.RED}
  `-''       `'    '    '   ` `--' '   '
 ${AnsiColor.BRIGHT_YELLOW}
 ::: Spring-Boot ${spring-boot.formatted-version} :::
-::: ${project.build.finalName}  ${project.version}      :::
 ::: Powered by W.         :::
 ${AnsiColor.BLACK}

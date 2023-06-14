@@ -33,6 +33,9 @@ public class FeignErrorDecoder implements Decoder, SmartInitializingSingleton {
             Object decode = responseEntityDecoder.decode(response, type);
             R<?> r = (R<?>) decode;
             if (r.getCode()!=200){
+                if (r.getCode()==405){
+                    throw new OprException(r.getData().toString());
+                }
                 throw new OprException(r.getMsg());
             }
             return r;

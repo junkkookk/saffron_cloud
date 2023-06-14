@@ -19,6 +19,5 @@ public class SaffronGateStart implements ApplicationStart {
 
     @Override
     public void init() {
-        log.info("Saffron-Gate init ..." );
     }
 }

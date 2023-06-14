@@ -16,6 +16,40 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.w</groupId>
+            <artifactId>saffron-web</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.w</groupId>
+            <artifactId>saffron-db</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.w</groupId>
+            <artifactId>saffron-security</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.w</groupId>
+            <artifactId>saffron-amqp</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.w</groupId>
+            <artifactId>saffron-model</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.w</groupId>
+            <artifactId>saffron-file</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.w</groupId>
+            <artifactId>saffron-cloud</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
             <groupId>me.zhyd.oauth</groupId>
             <artifactId>JustAuth</artifactId>
         </dependency>

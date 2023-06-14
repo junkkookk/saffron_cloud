@@ -62,9 +62,7 @@ const Video: React.FC = () => {
         >
           <ProList
             pagination={page}
-            headerTitle={"视频列表"}
             actionRef={actionRef}
-
             grid={{
               gutter: 14,
               xs: 1,
@@ -74,6 +72,24 @@ const Video: React.FC = () => {
               xl: 4,
               xxl: 4,
             }}
+
+            search={{
+
+            }}
+            metas={[
+              {
+                dataIndex:"title",
+                valueType:'text'
+              },
+              {
+                dataIndex:"status",
+                initialValue: '1',
+                valueEnum:{
+                  1:'已采集',
+                  2:'出错'
+                },
+              }
+            ]}
             request={async (params:{current: number,pageSize: number})=>{
                 const {data} = await searchVideo(params)
                 if (params.current&&params.pageSize){
