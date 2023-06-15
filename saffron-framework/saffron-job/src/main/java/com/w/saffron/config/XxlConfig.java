@@ -1,8 +1,7 @@
 package com.w.saffron.config;
 
-import cn.hutool.extra.spring.SpringUtil;
-import com.w.saffron.utils.NumberUtil;
 import com.w.saffron.schdule.XxlJobProperties;
+import com.w.saffron.utils.NumberUtil;
 import com.xxl.job.core.executor.impl.XxlJobSpringExecutor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -2,14 +2,18 @@ package com.w.saffron.system.controller;
 
 import com.w.saffron.common.R;
 import com.w.saffron.system.dto.LoginDto;
-import com.w.saffron.system.dto.ProfileDto;
 import com.w.saffron.system.service.HorusService;
 import jakarta.servlet.http.HttpServletResponse;
 import me.zhyd.oauth.model.AuthCallback;
 import me.zhyd.oauth.request.AuthRequest;
 import me.zhyd.oauth.utils.AuthStateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 
@@ -42,12 +46,6 @@ public class HorusController {
     @GetMapping("profile")
     public R<?> getProfile(){
         return R.ok(horusService.getProfile());
-    }
-
-    @PatchMapping ("profile")
-    public R<?> updateProfile(ProfileDto profileDto){
-        horusService.updateProfile(profileDto);
-        return R.ok();
     }
 
     @RequestMapping("oauth/render/{source}")

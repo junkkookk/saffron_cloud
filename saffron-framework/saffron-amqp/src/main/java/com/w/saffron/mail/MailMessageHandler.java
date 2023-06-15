@@ -1,8 +1,8 @@
 package com.w.saffron.mail;
 
 
-import com.w.saffron.queue.MailQueue;
 import com.w.saffron.dto.MailMessageDto;
+import com.w.saffron.queue.MailQueue;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;

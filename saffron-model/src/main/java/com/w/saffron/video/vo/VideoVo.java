@@ -1,15 +1,5 @@
 package com.w.saffron.video.vo;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.w.saffron.common.constant.Insert;
-import com.w.saffron.common.constant.Update;
-import com.w.saffron.common.enumrate.CodeToEnumDeserializer;
-import com.w.saffron.video.constant.Category;
-import com.w.saffron.video.constant.Source;
-import com.w.saffron.video.constant.Status;
-import com.w.saffron.video.constant.Type;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

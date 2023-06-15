@@ -6,19 +6,18 @@ import com.w.saffron.video.constant.Category;
 import com.w.saffron.video.constant.Source;
 import com.w.saffron.video.constant.Status;
 import com.w.saffron.video.constant.Type;
-import com.w.saffron.video.dto.VideoDto;
-import com.w.saffron.video.dto.VideoSearchDto;
 import com.w.saffron.video.vo.VideoVo;
 import io.github.linpeilie.annotations.AutoMapper;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.Accessors;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * @author w
