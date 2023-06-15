@@ -3,9 +3,9 @@ package com.w.saffron.rpc.server.v100;
 import com.w.saffron.common.PageResult;
 import com.w.saffron.common.R;
 import com.w.saffron.rpc.FeignInterceptor;
-import com.w.saffron.video.bean.VideoRequest;
-import com.w.saffron.video.domain.Video;
 import com.w.saffron.video.dto.VideoDto;
+import com.w.saffron.video.dto.VideoSearchDto;
+import com.w.saffron.video.vo.VideoVo;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -26,14 +26,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface VideoInterface {
 
     @GetMapping("/saffron-server/video/find-by-id")
-    R<Video> findById(@RequestParam("id") Long id);
+    R<VideoVo> findById(@RequestParam("id") Long id);
 
     @PostMapping("/saffron-server/video/search")
-    R<PageResult<Video>> search(@RequestBody VideoDto videoDto);
+    R<PageResult<VideoVo>> search(@RequestBody VideoSearchDto videoDto);
     @PutMapping("/saffron-server/video")
-    R<?> addVideo(@RequestBody VideoRequest.SaveOrUpdate video);
+    R<?> addVideo(@RequestBody VideoDto video);
 
     @PatchMapping("/saffron-server/video")
-    R<?> updateVideo(@RequestBody VideoRequest.SaveOrUpdate video);
+    R<?> updateVideo(@RequestBody VideoDto video);
 
 }

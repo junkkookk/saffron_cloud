@@ -1,4 +1,4 @@
-package com.w.saffron.system.constant;
+package com.w.saffron.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,7 +17,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Builder
 @Accessors(chain = true)
-public class MailMessageBean implements Serializable {
+public class MailMessageDto implements Serializable {
     private static final long serialVersionUID = 7470226623374955171L;
     String subject;
     String content;

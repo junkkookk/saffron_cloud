@@ -6,8 +6,6 @@ package com.w.saffron.common;
  */
 public class BaseDto {
 
-    private Long id;
-
     private String searchText;
 
     private Integer current = 1;

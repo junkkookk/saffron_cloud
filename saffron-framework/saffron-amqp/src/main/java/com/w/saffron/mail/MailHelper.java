@@ -1,7 +1,7 @@
 package com.w.saffron.mail;
 
 import cn.hutool.extra.spring.SpringUtil;
-import com.w.saffron.bean.MailMessageBean;
+import com.w.saffron.dto.MailMessageDto;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class MailHelper {
 
-    public  void sendHtmlMail(MailMessageBean messageBean) {
+    public  void sendHtmlMail(MailMessageDto messageBean) {
         JavaMailSender mailSender = SpringUtil.getBean(JavaMailSender.class);
         MimeMessage message = mailSender.createMimeMessage();
         try {

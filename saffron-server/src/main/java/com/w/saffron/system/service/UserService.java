@@ -4,7 +4,7 @@ package com.w.saffron.system.service;
 import com.w.saffron.common.PageParam;
 import com.w.saffron.common.PageResult;
 import com.w.saffron.exception.OprException;
-import com.w.saffron.system.bean.UserBean;
+import com.w.saffron.system.dto.UserDto;
 import com.w.saffron.system.dao.UserDao;
 import com.w.saffron.system.domain.User;
 import io.github.linpeilie.Converter;
@@ -38,13 +38,13 @@ public class UserService {
         return userDao.findById(id).orElseThrow(()-> new OprException("can't find user"));
     }
 
-    public PageResult<UserBean> findPage(Integer current, Integer pageSize, String searchText, UserBean userBean) {
-        User user = converter.convert(userBean,User.class);
+    public PageResult<UserDto> findPage(Integer current, Integer pageSize, String searchText, UserDto userDto) {
+        User user = converter.convert(userDto,User.class);
         if (user==null){
             user = new User();
         }
         return PageResult.of(userDao.findAll(Example.of(user), PageParam.of(current,pageSize)).map((item)-> converter.convert(item,
-            UserBean.class)).toList());
+            UserDto.class)).toList());
     }
 
     public User save(User user) {

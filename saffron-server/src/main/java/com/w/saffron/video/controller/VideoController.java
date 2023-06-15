@@ -4,9 +4,9 @@ package com.w.saffron.video.controller;
 import com.w.saffron.common.R;
 import com.w.saffron.common.constant.Insert;
 import com.w.saffron.common.constant.Update;
-import com.w.saffron.video.bean.VideoRequest;
 import com.w.saffron.video.domain.Video;
 import com.w.saffron.video.dto.VideoDto;
+import com.w.saffron.video.dto.VideoSearchDto;
 import com.w.saffron.video.service.VideoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,19 +37,19 @@ public class VideoController {
     }
 
     @PutMapping
-    public R<?> put(@RequestBody @Validated(Insert.class) VideoRequest.SaveOrUpdate req){
+    public R<?> put(@RequestBody @Validated(Insert.class) VideoDto req){
         videoService.saveOrUpdate(req);
         return R.ok();
     }
 
     @PatchMapping
-    public R<?> patch(@RequestBody @Validated(Update.class) VideoRequest.SaveOrUpdate req){
+    public R<?> patch(@RequestBody @Validated(Update.class) VideoDto req){
         videoService.saveOrUpdate(req);
         return R.ok();
     }
 
     @PostMapping("search")
-    public R<?> search(@RequestBody VideoDto videoDto){
+    public R<?> search(@RequestBody VideoSearchDto videoDto){
         return R.ok(videoService.search(videoDto));
     }
 

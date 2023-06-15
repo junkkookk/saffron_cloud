@@ -1,8 +1,8 @@
 package com.w.saffron.system.controller;
 
 import com.w.saffron.common.R;
-import com.w.saffron.system.bean.LoginBean;
-import com.w.saffron.system.constant.ProfileBean;
+import com.w.saffron.system.dto.LoginDto;
+import com.w.saffron.system.dto.ProfileDto;
 import com.w.saffron.system.service.HorusService;
 import jakarta.servlet.http.HttpServletResponse;
 import me.zhyd.oauth.model.AuthCallback;
@@ -29,8 +29,8 @@ public class HorusController {
     }
 
     @PostMapping("login")
-    public R<?> login(LoginBean loginBean){
-        return R.ok(horusService.login(loginBean));
+    public R<?> login(LoginDto loginDto){
+        return R.ok(horusService.login(loginDto));
     }
 
     @GetMapping("logout")
@@ -45,8 +45,8 @@ public class HorusController {
     }
 
     @PatchMapping ("profile")
-    public R<?> updateProfile(ProfileBean profileBean){
-        horusService.updateProfile(profileBean);
+    public R<?> updateProfile(ProfileDto profileDto){
+        horusService.updateProfile(profileDto);
         return R.ok();
     }
 

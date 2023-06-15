@@ -3,22 +3,25 @@ package com.w.saffron.system.service;
 import cn.dev33.satoken.secure.SaSecureUtil;
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
-import cn.hutool.core.date.DateTime;
-import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.StrUtil;
-import com.w.saffron.application.sys.constant.LoginTypeEnum;
+
 import com.w.saffron.cache.RedisManager;
+import com.w.saffron.covert.UserConverter;
+import com.w.saffron.dto.MailMessageDto;
 import com.w.saffron.exception.OprException;
-import com.w.saffron.system.bean.LoginBean;
-import com.w.saffron.system.constant.*;
+import com.w.saffron.queue.MailQueue;
+import com.w.saffron.system.constant.HorusCons;
+import com.w.saffron.system.constant.LoginTypeEnum;
+import com.w.saffron.system.constant.UserStatusEnum;
+import com.w.saffron.system.dto.LoginDto;
+import com.w.saffron.system.dto.ProfileDto;
 import com.w.saffron.system.domain.SocialUser;
 import com.w.saffron.system.domain.SocialUserRel;
 import com.w.saffron.system.domain.User;
-import com.w.saffron.utils.BeanUtil;
+import com.w.saffron.system.vo.ProfileVo;
 import com.w.saffron.utils.TemplateUtil;
 import com.xkcoding.http.config.HttpConfig;
-import io.github.linpeilie.Converter;
 import me.zhyd.oauth.config.AuthConfig;
 import me.zhyd.oauth.model.AuthCallback;
 import me.zhyd.oauth.model.AuthUser;
@@ -33,7 +36,6 @@ import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.text.MessageFormat;
 import java.time.Duration;
-import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -51,28 +53,24 @@ public class HorusService {
     private final SocialUserRelService socialUserRelService;
 
     private final RabbitTemplate rabbitTemplate;
-    private final Converter converter;
 
     @Autowired
     public HorusService(UserService userService,
                         SocialUserService socialUserService,
                        SocialUserRelService socialUserRelService,
-                        RabbitTemplate rabbitTemplate,
-                        Converter converter) {
+                        RabbitTemplate rabbitTemplate) {
         this.userService = userService;
         this.socialUserService = socialUserService;
         this.socialUserRelService = socialUserRelService;
         this.rabbitTemplate = rabbitTemplate;
-        this.converter = converter;
     }
-
-    public SaTokenInfo login(LoginBean loginBean){
-        LoginTypeEnum loginTypeEnum = LoginTypeEnum.parse(loginBean.getLoginType());
+    public SaTokenInfo login(LoginDto loginDto){
+        LoginTypeEnum loginTypeEnum = LoginTypeEnum.parse(loginDto.getLoginType());
         User findUser = null;
         switch (loginTypeEnum) {
             case USERNAME_PASSWORD -> {
-                String username = loginBean.getUsername();
-                String password = loginBean.getPassword();
+                String username = loginDto.getUsername();
+                String password = loginDto.getPassword();
                 if (StrUtil.isEmpty(username)) {
                     throw new OprException("username is empty!");
                 }
@@ -88,8 +86,8 @@ public class HorusService {
                 }
             }
             case EMAIL_CODE -> {
-                String email = loginBean.getEmail();
-                String code = loginBean.getCode();
+                String email = loginDto.getEmail();
+                String code = loginDto.getCode();
                 findUser = userService.findByEmail(email);
                 String cacheCode = RedisManager.get(email);
                 if (StrUtil.isEmpty(cacheCode)) {
@@ -113,20 +111,23 @@ public class HorusService {
             throw new OprException("user is ban");
         }
         StpUtil.login(findUser.getId(),loginTypeEnum.getLabel());
-        updateLastTime(findUser.getId());
         return StpUtil.getTokenInfo();
     }
 
 
-    public ProfileBean getProfile() {
+    public ProfileVo getProfile() {
         Long id = StpUtil.getLoginIdAsLong();
         String key = MessageFormat.format(HorusCons.PROFILE_KEY,id);
-        User profile = RedisManager.get(key, User.class);
+        ProfileVo profile = RedisManager.get(key, ProfileVo.class);
         if (profile==null){
-             profile = userService.findById(id);
+             User user = userService.findById(id);
+             if (user==null){
+                 throw new OprException("异常用户");
+             }
+             profile = UserConverter.toUserProfileVo(user);
              RedisManager.set(key,profile,1L, TimeUnit.HOURS);
         }
-        return converter.convert(profile,ProfileBean.class);
+        return profile;
     }
 
     public SaTokenInfo oauthLogin(AuthCallback callback,String source) {
@@ -189,35 +190,6 @@ public class HorusService {
         return null;
     }
 
-    public void updateProfile(ProfileBean profileBean) {
-        long id = StpUtil.getLoginIdAsLong();
-        profileBean.setId(id);
-        String avatar = profileBean.getAvatar();
-        if (StrUtil.isNotEmpty(avatar)){
-            profileBean.setAvatar(avatar);
-        }else {
-            profileBean.setAvatar(null);
-        }
-        String birthdayStr = profileBean.getBirthdayStr();
-        if (StrUtil.isNotEmpty(birthdayStr)){
-            DateTime time = DateUtil.parse(birthdayStr);
-            Date date = time.toJdkDate();
-            profileBean.setBirthday(date);
-        }
-        User user = converter.convert(profileBean,User.class);
-        User oldUser = userService.findById(id);
-        BeanUtil.copy(user, oldUser);
-        userService.save(oldUser);
-        RedisManager.remove(MessageFormat.format(HorusCons.PROFILE_KEY,id));
-    }
-
-
-    public void updateLastTime(Long userId){
-        User user = userService.findById(userId);
-        user.setLastTime(new Date());
-        userService.save(user);
-    }
-
     public void generateEmailCode(String email) {
         if (!isValid(email)){
             throw new OprException("邮件地址不合法");
@@ -228,8 +200,8 @@ public class HorusService {
         }
         String emailCode = RandomUtil.randomNumbers(6);
         RedisManager.set(email, emailCode, Duration.ofMinutes(5L));
-        MailMessageBean messageBean = new MailMessageBean("【登录验证码】", TemplateUtil.getMailCodeHtml(emailCode,"【登录验证码】"),email );
-        rabbitTemplate.convertAndSend(MailCons.DIRECT_MAIL_QUEUE,messageBean);
+        MailMessageDto messageDto = new MailMessageDto("【登录验证码】", TemplateUtil.getMailCodeHtml(emailCode,"【登录验证码】"),email );
+        rabbitTemplate.convertAndSend(MailQueue.DIRECT_MAIL_QUEUE,messageDto);
     }
 
     private boolean isValid(String email) {

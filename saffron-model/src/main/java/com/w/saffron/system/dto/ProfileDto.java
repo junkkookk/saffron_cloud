@@ -1,7 +1,4 @@
-package com.w.saffron.system.constant;
-
-import com.w.saffron.system.domain.User;
-import io.github.linpeilie.annotations.AutoMapper;
+package com.w.saffron.system.dto;
 import lombok.Data;
 
 import java.util.Date;
@@ -11,8 +8,7 @@ import java.util.Date;
  * @since 2023/3/22
  */
 @Data
-@AutoMapper(target = User.class)
-public class ProfileBean {
+public class ProfileDto {
 
     Long id;
     String username;

@@ -5,7 +5,7 @@ import com.w.saffron.crawler.service.ZmqService;
 import com.w.saffron.rpc.server.v100.VideoInterface;
 import com.w.saffron.schdule.BaseJob;
 import com.w.saffron.schdule.ScheduleBuilder;
-import com.w.saffron.video.bean.VideoRequest;
+import com.w.saffron.video.dto.VideoDto;
 import com.xxl.job.core.biz.model.ReturnT;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -37,12 +37,12 @@ public class FetchZmqJob extends BaseJob {
         int totalCount=0;
         while (hasMore){
             int count = 0;
-            List<VideoRequest.SaveOrUpdate> videoReqList = zmqService.findByPage(page);
+            List<VideoDto> videoReqList = zmqService.findByPage(page);
             page++;
-            for (VideoRequest.SaveOrUpdate saveOrUpdate : videoReqList) {
+            for (VideoDto video : videoReqList) {
                 try {
-                    videoInterface.addVideo(saveOrUpdate);
-                    log.info("入库成功:{}", saveOrUpdate.getTitle());
+                    videoInterface.addVideo(video);
+                    log.info("入库成功:{}", video.getTitle());
                     count++;
                 }catch (Exception e){
                     log.error("入库出错："+ e.getMessage());

@@ -1,7 +1,13 @@
 package com.w.saffron.common;
 
-import io.github.linpeilie.annotations.AutoMapping;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -36,12 +42,10 @@ public abstract class BaseEntity implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "create_time", nullable = false, updatable = false)
     @CreatedDate
-    @AutoMapping(dateFormat = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "update_time", nullable = false)
     @LastModifiedDate
-    @AutoMapping(dateFormat = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 }

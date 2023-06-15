@@ -20,7 +20,6 @@
         <dependency>
             <groupId>com.w</groupId>
             <artifactId>saffron-common</artifactId>
-            <version>1.0.0</version>
         </dependency>
         <!--注册中心客户端-->
         <dependency>

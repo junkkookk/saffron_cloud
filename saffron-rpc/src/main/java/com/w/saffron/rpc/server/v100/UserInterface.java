@@ -1,8 +1,8 @@
 package com.w.saffron.rpc.server.v100;
 
+
 import com.w.saffron.common.R;
 import com.w.saffron.rpc.FeignInterceptor;
-import com.w.saffron.system.domain.User;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface UserInterface {
 
     @GetMapping("/saffron-server/user/find-by-id")
-    R<User> findById(@RequestParam("userId")Long id);
+    R<?> findById(@RequestParam("userId")Long id);
 
 }

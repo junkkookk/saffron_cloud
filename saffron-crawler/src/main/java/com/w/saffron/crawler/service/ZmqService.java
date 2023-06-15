@@ -8,8 +8,8 @@ import cn.hutool.json.JSONUtil;
 
 import com.w.saffron.crawler.interfaces.ZmqApi;
 import com.w.saffron.exception.OprException;
-import com.w.saffron.video.bean.VideoRequest;
 import com.w.saffron.video.constant.*;
+import com.w.saffron.video.dto.VideoDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,11 +52,11 @@ public class ZmqService {
     }
 
 
-    public List<VideoRequest.SaveOrUpdate> findByPage(Integer page) {
+    public List<VideoDto> findByPage(Integer page) {
         if (page == null) {
             throw new OprException("请传递分页参数");
         }
-        List<VideoRequest.SaveOrUpdate> videoRequests = new ArrayList<>();
+        List<VideoDto> videoRequests = new ArrayList<>();
         try {
             String body = zmqApi.home(ZmqCons.USER_ID,page);
             JSONObject jsonObject = JSONUtil.parseObj(body);
@@ -68,7 +68,7 @@ public class ZmqService {
                 String author = video.getByPath("o.n", String.class);
                 String t = url.substring(0, url.length() - 41);
                 String cover = "https://cnfemdomtube.com/" + t + id + "thumb_0002.jpg";
-                videoRequests.add(VideoRequest.SaveOrUpdate.builder()
+                videoRequests.add(VideoDto.builder()
                         .source(Source.ZMQ)
                         .category(Category.LIVE)
                         .videoType(Type.M3U8)

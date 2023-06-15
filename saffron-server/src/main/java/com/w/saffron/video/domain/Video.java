@@ -2,17 +2,23 @@ package com.w.saffron.video.domain;
 
 
 import com.w.saffron.common.BaseEntity;
-import com.w.saffron.video.bean.VideoRequest;
 import com.w.saffron.video.constant.Category;
 import com.w.saffron.video.constant.Source;
 import com.w.saffron.video.constant.Status;
 import com.w.saffron.video.constant.Type;
+import com.w.saffron.video.dto.VideoDto;
+import com.w.saffron.video.dto.VideoSearchDto;
+import com.w.saffron.video.vo.VideoVo;
 import io.github.linpeilie.annotations.AutoMapper;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.*;
 import lombok.experimental.Accessors;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author w
@@ -27,7 +33,7 @@ import lombok.experimental.Accessors;
 @Builder
 @Accessors(chain = true)
 @Table(name="vid_video")
-@AutoMapper(target = VideoRequest.SaveOrUpdate.class)
+@AutoMapper(target = VideoVo.class)
 public class Video extends BaseEntity {
 
     private String uuid;
@@ -51,6 +57,4 @@ public class Video extends BaseEntity {
 
     @Convert(converter = Status.Converter.class)
     private Status status;
-
-
 }

@@ -1,13 +1,14 @@
 package com.w.saffron.system.domain;
 
 import com.w.saffron.common.BaseEntity;
-import com.w.saffron.system.bean.UserBean;
-import com.w.saffron.system.constant.ProfileBean;
-import io.github.linpeilie.annotations.AutoMapper;
-import io.github.linpeilie.annotations.AutoMappers;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 
 import java.util.Date;
@@ -25,10 +26,6 @@ import java.util.Date;
 @ToString
 @Builder
 @Accessors(chain = true)
-@AutoMappers({
-        @AutoMapper(target = ProfileBean.class),
-        @AutoMapper(target = UserBean.class)
-})
 public class User extends BaseEntity {
 
     private String username;

@@ -2,7 +2,7 @@ package com.w.saffron.mail;
 
 
 import com.w.saffron.queue.MailQueue;
-import com.w.saffron.bean.MailMessageBean;
+import com.w.saffron.dto.MailMessageDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
@@ -29,7 +29,7 @@ public class MailMessageHandler {
 
     @RabbitHandler
     @RabbitListener(queues = MailQueue.DIRECT_MAIL_QUEUE)
-    public void mailMessageHandle(MailMessageBean messageBean){
+    public void mailMessageHandle(MailMessageDto messageBean){
         log.info("接收消息:{}-{}", messageBean.getSubject(),messageBean.getTo());
         mailHelper.sendHtmlMail(messageBean);
     }

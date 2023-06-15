@@ -4,7 +4,7 @@ import cn.hutool.extra.spring.SpringUtil;
 import com.w.saffron.rpc.server.v100.VideoInterface;
 import com.w.saffron.schdule.BaseJob;
 import com.w.saffron.schdule.ScheduleBuilder;
-import com.w.saffron.video.bean.VideoRequest;
+import com.w.saffron.video.dto.VideoDto;
 import com.xxl.job.core.biz.model.ReturnT;
 
 /**
@@ -25,7 +25,7 @@ public class TestJob extends BaseJob {
         VideoInterface videoInterface = SpringUtil.getBean(VideoInterface.class);
         try {
             System.out.println(videoInterface.addVideo(
-                    VideoRequest.SaveOrUpdate.builder()
+                    VideoDto.builder()
                             .uuid("aaa")
                             .build()
             ));

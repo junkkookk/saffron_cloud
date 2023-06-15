@@ -3,7 +3,7 @@ package com.w.saffron.system.controller;
 
 import com.w.saffron.common.PageResult;
 import com.w.saffron.common.R;
-import com.w.saffron.system.bean.UserBean;
+import com.w.saffron.system.dto.UserDto;
 import com.w.saffron.system.domain.User;
 import com.w.saffron.system.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +27,8 @@ public class UserController {
     }
 
     @GetMapping("search")
-    public R<PageResult<?>> findPage(Integer current, Integer pageSize, String searchText, UserBean userBean){
-        return R.ok(userService.findPage(current,pageSize, searchText,userBean));
+    public R<PageResult<?>> findPage(Integer current, Integer pageSize, String searchText, UserDto userDto){
+        return R.ok(userService.findPage(current,pageSize, searchText, userDto));
     }
 
     @GetMapping(value = "find-by-id")

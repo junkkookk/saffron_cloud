@@ -1,4 +1,4 @@
-package com.w.saffron.bean;
+package com.w.saffron.dto;
 
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package com.w.saffron.application.sys.constant;
+package com.w.saffron.system.constant;
 
 import lombok.Getter;
 

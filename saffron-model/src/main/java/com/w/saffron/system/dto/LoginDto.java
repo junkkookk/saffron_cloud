@@ -1,4 +1,4 @@
-package com.w.saffron.system.bean;
+package com.w.saffron.system.dto;
 
 import lombok.Data;
 
@@ -9,7 +9,7 @@ import jakarta.validation.constraints.NotNull;
  * @since 2023/3/22
  */
 @Data
-public class LoginBean {
+public class LoginDto {
 
     private String username;
     @NotNull(message = "密码不能为空")
